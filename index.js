@@ -29,18 +29,19 @@ Cuenta: ${summonerName}
 ${tier} ${rank}   ${leaguePoints}LPs  
 `
 
-  //En caso de que no haya suficientes partidas, repite el proceso con la siguiente cuenta del usuario en la lista. usando recursividad.
+  //3 OPCIONES. 
+  //1. TWEET SOBRE ESTA CUENTA
   if (totalGames > 3){
-    await tweet(text).catch(e => console.error(e))
-  } else {
-    if (acc < accounts[twitterName].length - 1){
-      console.log(`Buscando en la siguiente cuenta de ${OBJETIVE}...`)
-      lolTweet(OBJETIVE, acc + 1)
-    } else {
-      console.log("No se encontraron partidas.")
-      await tweet(`@${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`).catch(e => console.error(e))
-    }
+    return await tweet(text).catch(e => console.error(e))
+  } 
+  //2. PASA A MIRAR LA SIGUIENTE CUENTA DEL JUGADOR (SI EXISTE)
+  if (acc < accounts[twitterName].length - 1){
+    console.log(`Buscando en la siguiente cuenta de ${OBJETIVE}...`)
+    return lolTweet(OBJETIVE, acc + 1)
   }
+  //3. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS:
+  console.log("No se encontraron partidas.")
+  await tweet(`@${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`).catch(e => console.error(e))
 }
 
 lolTweet(OBJETIVE, 0);
