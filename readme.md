@@ -34,3 +34,4 @@ Ahora mismo:
 [] Hacer la lista completa de participantes.
 [] Funciona perfecto el tweet manual, sea cual sea el @.
 [] Detector de menciones y respuesta.
+[] Para evitar llamadas innecesarias a la api. Habría alguna forma de comprobar que ha jugado partidas suficientes con una sola llamada?
