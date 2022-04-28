@@ -12,7 +12,7 @@ const getMatchHistoryByPuuid = async (puuid, timestamp) => {
   result = []
 
   //Sólo este bucle me permite esperar los datos sin saltar al siguiente ciclo.  
-  for(const element of matchHistoryResponse.data){
+  for (const element of matchHistoryResponse.data) {
     let gameResponse = await axios
       .get(`${process.env.LOL_REGION}/lol/match/v5/matches/${element}`,
         { headers: { "X-Riot-Token": process.env.LOL_KEY } })
@@ -22,10 +22,10 @@ const getMatchHistoryByPuuid = async (puuid, timestamp) => {
     gameData = gameResponse.data.info
 
     //TIME LIMIT
-    if (gameData.gameEndTimestamp < timestamp){ break; }
+    if (gameData.gameEndTimestamp < timestamp) { break; }
 
     //ONLY RANKED GAMES
-    if (gameData.gameType === "MATCHED_GAME" && gameData.gameMode === "CLASSIC"){
+    if (gameData.gameType === "MATCHED_GAME" && gameData.gameMode === "CLASSIC") {
       result.push({
         //"game": gameResponse.data.metadata.matchId,
         //"gameMode": gameData.gameMode,
@@ -55,6 +55,21 @@ const getSummonerInfoByName = async (summonerName) => {
     .catch(e => {
       console.error(e)
     })
+
+  //Return for Unrankeds  
+  if (responseRanked.data.length === 0) {
+    return {
+      id,
+      puuid,
+      summonerLevel,
+      tier: "Unranked",
+      rank: "",
+      wins: 0,
+      losses: 0,
+      leaguePoints: 0,
+      winRate: 0
+    }
+  }
 
   const { tier, rank, wins, losses, leaguePoints } = responseRanked.data.filter(rank => rank.queueType === "RANKED_SOLO_5x5")[0]
   return {
@@ -86,6 +101,21 @@ const getSummonerInfoByPuuid = async (puuid) => {
     .catch(e => {
       console.error(e)
     })
+
+  //Return for Unrankeds  
+  if (responseRanked.data.length === 0) {
+    return {
+      id,
+      puuid,
+      summonerLevel,
+      tier: "Unranked",
+      rank: "",
+      wins: 0,
+      losses: 0,
+      leaguePoints: 0,
+      winRate: 0
+    }
+  }
 
   const { tier, rank, wins, losses, leaguePoints } = responseRanked.data.filter(rank => rank.queueType === "RANKED_SOLO_5x5")[0]
   return {
