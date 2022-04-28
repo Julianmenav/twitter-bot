@@ -70,10 +70,41 @@ const getSummonerInfoByName = async (summonerName) => {
   }
 }
 
+const getSummonerInfoByPuuid = async (puuid) => {
+
+  const summonerIdResponse = await axios
+    .get(`${process.env.LOL_URL}/lol/summoner/v4/summoners/by-puuid/${puuid}`,
+      { headers: { "X-Riot-Token": process.env.LOL_KEY } })
+    .catch(e => {
+      console.error(e.response.data)
+    })
+
+  const { id, name, summonerLevel } = summonerIdResponse.data
+  const responseRanked = await axios
+    .get(`${process.env.LOL_URL}/lol/league/v4/entries/by-summoner/${id}`,
+      { headers: { "X-Riot-Token": process.env.LOL_KEY } })
+    .catch(e => {
+      console.error(e)
+    })
+
+  const { tier, rank, wins, losses, leaguePoints } = responseRanked.data.filter(rank => rank.queueType === "RANKED_SOLO_5x5")[0]
+  return {
+    id,
+    name,
+    summonerLevel,
+    tier,
+    rank,
+    wins,
+    losses,
+    leaguePoints,
+    winRate: ((wins / (wins + losses)) * 100).toFixed(1)
+  }
+}
 
 module.exports = {
   getSummonerInfoByName,
-  getMatchHistoryByPuuid
+  getMatchHistoryByPuuid,
+  getSummonerInfoByPuuid
 }
 
 

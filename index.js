@@ -1,19 +1,19 @@
 require('dotenv').config()
 const { tweet } = require('./twitter-api-functions')
-const { getSummonerInfoByName, getMatchHistoryByPuuid } = require('./lol-api-functions')
+const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
 const { accounts } = require('./accountsList')
 const HOURS = 12
 const OBJETIVE = "lupiiiix"
 
 async function lolTweet(twitterName, acc) {
 
-  const summonerName = accounts[twitterName][acc].name
-  const tierData = await getSummonerInfoByName(summonerName)
-  const { tier, rank, leaguePoints, puuid } = tierData
+  const summonerPuuid = accounts[twitterName][acc].puuid
+  const tierData = await getSummonerInfoByPuuid(summonerPuuid)
+  const { tier, rank, leaguePoints, name} = tierData
 
 
   const timestampLimit = Math.floor(new Date().getTime()) - HOURS * 3600000
-  const matchData = await getMatchHistoryByPuuid(puuid, timestampLimit)
+  const matchData = await getMatchHistoryByPuuid(summonerPuuid, timestampLimit)
   const totalGames = matchData.length
   const wins = matchData.filter(el => el.win).length
   const loses = totalGames - wins
@@ -23,7 +23,7 @@ async function lolTweet(twitterName, acc) {
     `
 Un mal día para @${twitterName}
 
-Cuenta: ${summonerName}
+Cuenta: ${name}
 -13 Lps en las últimas ${HOURS} horas
 (${wins} victorias ${loses} derrotas)
 ${tier} ${rank}   ${leaguePoints}LPs  

@@ -28,7 +28,7 @@ Rank: Diamante II 23 LPs
 -Busca información de la cuenta que esté emparejada (LPs actuales, victorias y derrotas las últimas 12 horas. cuantos lps de diferencia?)
 
 Ahora mismo:
-[] La función para sacar información del jugador debe usar puuid en lugar del nombre de invocador. Este último nunca debe usarse para buscar en la api ya que puede cambiar.
+[X] La función para sacar información del jugador debe usar puuid en lugar del nombre de invocador. Este último nunca debe usarse para buscar en la api ya que puede cambiar.
 [X] Añadir un número de horas en las que buscar (Pasar eso a unix: unix hoy - unix numero horas.)
 [] Conseguir la diferencia de LPs aunque sea con scraping.
 [] Hacer la lista completa de participantes.
