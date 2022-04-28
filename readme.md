@@ -35,4 +35,8 @@ Ahora mismo:
 [X] Hacer la lista completa de participantes.
 [] Funciona perfecto el tweet manual, sea cual sea el @.
 [] Detector de menciones y respuesta.
+[] Controlar todas las exceptions.
 [] Para evitar llamadas innecesarias a la api. Habría alguna forma de comprobar que ha jugado partidas suficientes con una sola llamada?
+[] Crear frases según el winrate y numero de partidas. 
+[] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜. Si no está en 100 puntos pero ha jugado promo un mensaje especial.
+
