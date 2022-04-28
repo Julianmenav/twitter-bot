@@ -21,7 +21,7 @@ async function lolTweet(twitterName, acc) {
 
   const text =
     `
-Un mal día para @${twitterName}
+Un mal día para @ ${twitterName}
 
 Cuenta: ${name}
 -13 Lps en las últimas ${HOURS} horas
