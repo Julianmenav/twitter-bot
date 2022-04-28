@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { tweet } = require('./twitter-api-functions')
 const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
-const { accounts } = require('./accountsList')
+const accounts = require('./accountsList')
 const HOURS = 12
 const OBJETIVE = "lupiiiix"
 
