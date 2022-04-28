@@ -1,9 +1,10 @@
 require('dotenv').config()
 const { tweet } = require('./twitter-api-functions')
 const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
+const { lpScraper } = require('./leagueScraper')
 const accounts = require('./accountsList')
 const HOURS = 12
-const OBJETIVE = "willyrex_fanboy"
+const OBJETIVE = "ffaka_"
 
 async function lolTweet(twitterName, acc) {
 
@@ -18,20 +19,22 @@ async function lolTweet(twitterName, acc) {
   const wins = matchData.filter(el => el.win).length
   const loses = totalGames - wins
 
+  const lpData = await lpScraper(name, totalGames)
+
 
   const text =
     `
 Un mal día para @ ${twitterName}
 
 Cuenta: ${name}
--13 Lps en las últimas ${HOURS} horas
+${lpData.lp > 0 ? "+" : "-"}${lpData.lp} Lps en las últimas ${HOURS} horas
 (${wins} victorias ${loses} derrotas)
 ${tier} ${rank}   ${leaguePoints}LPs  
 `
 
   //3 OPCIONES. 
   //1. TWEET SOBRE ESTA CUENTA
-  if (totalGames > 3){
+  if (totalGames > 2){
     return await tweet(text).catch(e => console.error(e))
   } 
   //2. PASA A MIRAR LA SIGUIENTE CUENTA DEL JUGADOR (SI EXISTE)
