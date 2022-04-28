@@ -3,7 +3,7 @@ const { tweet } = require('./twitter-api-functions')
 const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
 const accounts = require('./accountsList')
 const HOURS = 12
-const OBJETIVE = "lupiiiix"
+const OBJETIVE = "willyrex_fanboy"
 
 async function lolTweet(twitterName, acc) {
 
@@ -41,7 +41,7 @@ ${tier} ${rank}   ${leaguePoints}LPs
   }
   //3. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS:
   console.log("No se encontraron partidas.")
-  await tweet(`@${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`).catch(e => console.error(e))
+  await tweet(`@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`).catch(e => console.error(e))
 }
 
 lolTweet(OBJETIVE, 0);
