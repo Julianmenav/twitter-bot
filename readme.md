@@ -30,8 +30,9 @@ Rank: Diamante II 23 LPs
 Ahora mismo:
 [X] La función para sacar información del jugador debe usar puuid en lugar del nombre de invocador. Este último nunca debe usarse para buscar en la api ya que puede cambiar.
 [X] Añadir un número de horas en las que buscar (Pasar eso a unix: unix hoy - unix numero horas.)
+[] Tweet para cuando falla el nombre.
 [] Conseguir la diferencia de LPs aunque sea con scraping.
-[] Hacer la lista completa de participantes.
+[X] Hacer la lista completa de participantes.
 [] Funciona perfecto el tweet manual, sea cual sea el @.
 [] Detector de menciones y respuesta.
 [] Para evitar llamadas innecesarias a la api. Habría alguna forma de comprobar que ha jugado partidas suficientes con una sola llamada?
