@@ -16,6 +16,7 @@ const lpScraper = async (summonerNameEncoded, nOfGames) => {
   })
   
   const lpDifference = lastGames.slice(0, nOfGames).reduce((agg, el) => {
+    agg.order.push(el)
     if(el == "Promo"){
       agg.promo += 1;
       return agg
@@ -23,7 +24,7 @@ const lpScraper = async (summonerNameEncoded, nOfGames) => {
       agg.lp += parseInt(el.slice(0, el.length - 2))
       return agg
     }
-  },{"lp": 0, "promo": 0})
+  },{"lp": 0, "promo": 0, "order": []})
 
   await browser.close();
   return lpDifference

@@ -2,9 +2,10 @@ require('dotenv').config()
 const { tweet } = require('./twitter-api-functions')
 const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
 const { lpScraper } = require('./leagueScraper')
+const { tester } = require('./matchTester')
 const accounts = require('./accountsList')
 const HOURS = 12
-const OBJETIVE = "ffaka_"
+const OBJETIVE = "FTREFORMED"
 
 async function lolTweet(twitterName, acc) {
   //Si el nombre no está en nuestra lista descartamos.
@@ -18,20 +19,23 @@ async function lolTweet(twitterName, acc) {
 
   const timestampLimit = Math.floor(new Date().getTime()) - HOURS * 3600000
   const matchData = await getMatchHistoryByPuuid(summonerPuuid, timestampLimit)
+
   const totalGames = matchData.length
   const wins = matchData.filter(el => el.win).length
   const loses = totalGames - wins
 
   const lpData = await lpScraper(name, totalGames)
 
-  const lpText = `${lpData.lp > 0 ? "+" : lpData.lp < 0 ? "-" : ""}${lpData.lp} Lps en las últimas ${HOURS} horas`
+  const makeSense = tester(matchData, lpData.order) //true or false
+  const lpText = `${lpData.lp > 0 ? "+" : lpData.lp < 0 ? "-" : ""}${lpData.lp} Lps en las últimas ${HOURS} horas [${lpData.order}]`
   const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
   const text =
     `
 Un mal día para @ ${twitterName}
 
 Cuenta: ${name}
-${isNaN(lpData.lp) ? "" : lpText}
+${ makeSense && !isNaN(lpData.lp) ? lpText : "" }
+
 (${wins}W - ${loses}L)
 ${tier} ${rank}  ${leaguePoints}LPs  
 `
@@ -64,3 +68,4 @@ const bucle = async (loopTime) => {
 }
 
 bucle(30000)
+//lolTweet(OBJETIVE, 0)

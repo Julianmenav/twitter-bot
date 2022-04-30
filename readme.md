@@ -40,4 +40,4 @@ Ahora mismo:
 [] Crear frases según el winrate y numero de partidas. 
 [] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜.
 [] En accounts, todos los nombres deberían estar escritos en minuscula. Cuando se busque se hará en minuscula y se twiteara asi tambien.
-[] Matchear el array de partidas con los LPs para ver si concuerdan. Solo enseñar LPs si concuerdan.
+[X] Matchear el array de partidas con los LPs para ver si concuerdan. Solo enseñar LPs si concuerdan.
