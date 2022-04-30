@@ -22,14 +22,15 @@ async function lolTweet(twitterName, acc) {
   const lpData = await lpScraper(name, totalGames)
 
   const lpText = `${lpData.lp > 0 ? "+" : lpData.lp < 0 ? "-" : ""}${lpData.lp} Lps en las últimas ${HOURS} horas`
+  const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
   const text =
     `
 Un mal día para @ ${twitterName}
 
 Cuenta: ${name}
 ${isNaN(lpData.lp) ? "" : lpText}
-(${wins} victorias ${loses} derrotas)
-${tier} ${rank}   ${leaguePoints}LPs  
+(${wins}W - ${loses}L)
+${tier} ${rank}  ${leaguePoints}LPs  
 `
 
   //3 OPCIONES. 
@@ -44,7 +45,7 @@ ${tier} ${rank}   ${leaguePoints}LPs
   }
   //3. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS:
   console.log("No se encontraron partidas.")
-  await tweet(`@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`).catch(e => console.error(e))
+  await tweet(noGamesText).catch(e => console.error(e))
 }
 
 const bucle = async (loopTime) => {
@@ -60,5 +61,3 @@ const bucle = async (loopTime) => {
 }
 
 //bucle(30000)
-
-lolTweet("AnnaBlue_17",0)
