@@ -61,3 +61,4 @@ const bucle = async (loopTime) => {
 
 //bucle(30000)
 
+lolTweet("AnnaBlue_17",0)
