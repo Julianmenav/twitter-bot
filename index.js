@@ -21,13 +21,13 @@ async function lolTweet(twitterName, acc) {
 
   const lpData = await lpScraper(name, totalGames)
 
-
+  const lpText = `${lpData.lp > 0 ? "+" : lpData.lp < 0 ? "-" : ""}${lpData.lp} Lps en las últimas ${HOURS} horas`
   const text =
     `
 Un mal día para @ ${twitterName}
 
 Cuenta: ${name}
-${lpData.lp > 0 ? "+" : "-"}${lpData.lp} Lps en las últimas ${HOURS} horas
+${isNaN(lpData.lp) ? "" : lpText}
 (${wins} victorias ${loses} derrotas)
 ${tier} ${rank}   ${leaguePoints}LPs  
 `
