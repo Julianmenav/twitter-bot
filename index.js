@@ -7,7 +7,10 @@ const HOURS = 12
 const OBJETIVE = "ffaka_"
 
 async function lolTweet(twitterName, acc) {
-
+  //Si el nombre no está en nuestra lista descartamos.
+  if (!accounts.hasOwnProperty(twitterName)){
+    return await tweet("No le sabe 😔").catch(e => console.error(e))
+  }
   const summonerPuuid = accounts[twitterName][acc].puuid
   const tierData = await getSummonerInfoByPuuid(summonerPuuid)
   const { tier, rank, leaguePoints, name} = tierData
@@ -60,4 +63,4 @@ const bucle = async (loopTime) => {
   }, loopTime)
 }
 
-//bucle(30000)
+bucle(30000)
