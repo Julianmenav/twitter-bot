@@ -47,6 +47,17 @@ ${tier} ${rank}   ${leaguePoints}LPs
   await tweet(`@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`).catch(e => console.error(e))
 }
 
-lolTweet(OBJETIVE, 0);
+const bucle = async (loopTime) => {
+  const interval = setInterval(async () => {
+    let randomNumber = Math.floor(Math.random() * 75 );
+    let randomPlayer = Object.keys(accounts)[randomNumber]
+    try {
+      await lolTweet(randomPlayer, 0)
+    } catch (error) {
+      console.error(error)
+    }
+  }, loopTime)
+}
 
+//bucle(30000)
 
