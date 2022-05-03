@@ -10,9 +10,11 @@ const HOURS = 12
 const OBJETIVE = "FTREFORMED"
 
 async function lolTweet(twitterName, acc) {
+  console.log(`Buscando partidas para ${twitterName}...`)
   const summoner = getParameterCaseInsensitive(accounts, twitterName)
   //Si el nombre no está en nuestra lista descartamos.
   if (!summoner){
+    console.log("No está en la lista.")
     return await tweet("No le sabe 😔").catch(e => console.error(e))
   }
   const summonerPuuid = summoner[acc].puuid
@@ -40,7 +42,8 @@ async function lolTweet(twitterName, acc) {
     //return await tweet(noGamesText).catch(e => console.error(e))
   } 
   //3. SI HAY SUFICIENTES PARTIDAS SE SIGUE CON EL PROGRAMA
-
+  console.log("Se encontraron partidas.")
+  console.log("Buscando los lps...")
   const lpData = await lpScraper(name, totalGames)
 
   const makeSense = tester(matchData, lpData.order) //true or false
