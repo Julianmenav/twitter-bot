@@ -39,7 +39,7 @@ Ahora mismo:
 [] Para evitar llamadas innecesarias a la api. Habría alguna forma de comprobar que ha jugado partidas suficientes con una sola llamada?
 [] Crear frases según el winrate y numero de partidas. 
 [] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜.
-[] En accounts, todos los nombres deberían estar escritos en minuscula. Cuando se busque se hará en minuscula y se twiteara asi tambien.
+[X] En accounts, todos los nombres deberían estar escritos en minuscula. Cuando se busque se hará en minuscula y se twiteara asi tambien.
 [X] Matchear el array de partidas con los LPs para ver si concuerdan. Solo enseñar LPs si concuerdan.
 []  A la hora de twittear random, solo twittear de gente que haya jugado hace poco.
 [] Si no salen los LP, no se ve lo de las ultimas 12 horas y confunde.

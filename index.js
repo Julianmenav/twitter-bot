@@ -3,16 +3,18 @@ const { tweet } = require('./twitter-api-functions')
 const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
 const { lpScraper } = require('./leagueScraper')
 const { tester } = require('./matchTester')
+const { getParameterCaseInsensitive } = require('./caseInsensitiveFinder')
 const accounts = require('./accountsList')
 const HOURS = 12
 const OBJETIVE = "FTREFORMED"
 
 async function lolTweet(twitterName, acc) {
+  const summoner = getParameterCaseInsensitive(accounts, twitterName)
   //Si el nombre no está en nuestra lista descartamos.
-  if (!accounts.hasOwnProperty(twitterName)){
+  if (!summoner){
     return await tweet("No le sabe 😔").catch(e => console.error(e))
   }
-  const summonerPuuid = accounts[twitterName][acc].puuid
+  const summonerPuuid = summoner[acc].puuid
   const tierData = await getSummonerInfoByPuuid(summonerPuuid)
   const { tier, rank, leaguePoints, name} = tierData
 
