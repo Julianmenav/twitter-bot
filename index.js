@@ -18,20 +18,33 @@ async function lolTweet(twitterName, acc) {
   const summonerPuuid = summoner[acc].puuid
   const tierData = await getSummonerInfoByPuuid(summonerPuuid)
   const { tier, rank, leaguePoints, name} = tierData
-
-
+  
+  
   const timestampLimit = Math.floor(new Date().getTime()) - HOURS * 3600000
   const matchData = await getMatchHistoryByPuuid(summonerPuuid, timestampLimit)
-
+  
   const totalGames = matchData.length
   const wins = matchData.filter(el => el.win).length
   const loses = totalGames - wins
+  //3 OPCIONES. 
+  //SI NO HAY SUFICIENTES PARTIDAS:
+  if (totalGames < 3){
+    //1. PASA A MIRAR LA SIGUIENTE CUENTA DEL JUGADOR (SI EXISTE)
+    if (acc < accounts[twitterName].length - 1){
+      console.log(`Buscando en la siguiente cuenta de ${OBJETIVE}...`)
+      return lolTweet(OBJETIVE, acc + 1)
+    }
+    //2. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS SUFICIENTES:
+    return console.log("No se encontraron partidas.")
+    const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
+    //return await tweet(noGamesText).catch(e => console.error(e))
+  } 
+  //3. SI HAY SUFICIENTES PARTIDAS SE SIGUE CON EL PROGRAMA
 
   const lpData = await lpScraper(name, totalGames)
 
   const makeSense = tester(matchData, lpData.order) //true or false
   const lpText = `${lpData.lp > 0 ? "+" : ""}${lpData.lp} Lps [${lpData.order}]`
-  const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
   const text =
     `
 ${getSentence(totalGames, wins, twitterName)}
@@ -44,19 +57,7 @@ ${ makeSense && !isNaN(lpData.lp) ? lpText : "" }
 ${tier} ${rank}  ${leaguePoints}LPs  
 `
 
-  //3 OPCIONES. 
-  //1. TWEET SOBRE ESTA CUENTA
-  if (totalGames > 2){
-    return await tweet(text).catch(e => console.error(e))
-  } 
-  //2. PASA A MIRAR LA SIGUIENTE CUENTA DEL JUGADOR (SI EXISTE)
-  if (acc < accounts[twitterName].length - 1){
-    console.log(`Buscando en la siguiente cuenta de ${OBJETIVE}...`)
-    return lolTweet(OBJETIVE, acc + 1)
-  }
-  //3. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS:
-  console.log("No se encontraron partidas.")
-  //await tweet(noGamesText).catch(e => console.error(e))
+  return await tweet(text).catch(e => console.error(e))
 }
 
 const bucle = async (loopTime) => {
