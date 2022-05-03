@@ -64,16 +64,16 @@ ${tier} ${rank}  ${leaguePoints}LPs
 }
 
 const bucle = async (loopTime) => {
-  const interval = setInterval(async () => {
+  while (true){
     let randomNumber = Math.floor(Math.random() * 75 );
     let randomPlayer = Object.keys(accounts)[randomNumber]
     try {
-      await lolTweet(randomPlayer, 0)
+      await new Promise(resolve => setTimeout(() => resolve(lolTweet(randomPlayer, 0)), loopTime))
     } catch (error) {
       console.error(error)
     }
-  }, loopTime)
+  }
 }
 
-bucle(10000)
+bucle(5000)
 //lolTweet(OBJETIVE, 0)
