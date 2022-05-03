@@ -27,7 +27,7 @@ async function lolTweet(twitterName, acc) {
   const lpData = await lpScraper(name, totalGames)
 
   const makeSense = tester(matchData, lpData.order) //true or false
-  const lpText = `${lpData.lp > 0 ? "+" : lpData.lp < 0 ? "-" : ""}${lpData.lp} Lps en las últimas ${HOURS} horas [${lpData.order}]`
+  const lpText = `${lpData.lp > 0 ? "+" : ""}${lpData.lp} Lps en las últimas ${HOURS} horas [${lpData.order}]`
   const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
   const text =
     `
