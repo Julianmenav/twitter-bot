@@ -4,6 +4,7 @@ const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-fu
 const { lpScraper } = require('./leagueScraper')
 const { tester } = require('./matchTester')
 const { getParameterCaseInsensitive } = require('./caseInsensitiveFinder')
+const { getSentence } = require('./sentences')
 const accounts = require('./accountsList')
 const HOURS = 12
 const OBJETIVE = "FTREFORMED"
@@ -33,7 +34,7 @@ async function lolTweet(twitterName, acc) {
   const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
   const text =
     `
-Un mal día para @ ${twitterName}
+${getSentence(totalGames, wins, twitterName)}
 
 Cuenta: ${name}
 En las últimas ${HOURS} horas:
@@ -55,7 +56,7 @@ ${tier} ${rank}  ${leaguePoints}LPs
   }
   //3. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS:
   console.log("No se encontraron partidas.")
-  await tweet(noGamesText).catch(e => console.error(e))
+  //await tweet(noGamesText).catch(e => console.error(e))
 }
 
 const bucle = async (loopTime) => {
