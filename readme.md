@@ -37,9 +37,9 @@ Ahora mismo:
 [] Detector de menciones y respuesta.
 [X] Controlar todas las exceptions.
 [X] Crear frases según el winrate y numero de partidas. 
-[] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜.
+[X] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜.
 [X] En accounts, todos los nombres deberían estar escritos en minuscula. Cuando se busque se hará en minuscula y se twiteara asi tambien.
 [X] Matchear el array de partidas con los LPs para ver si concuerdan. Solo enseñar LPs si concuerdan.
-[]  A la hora de twittear random, solo twittear de gente que haya jugado hace poco.
+[X]  A la hora de twittear random, solo twittear de gente que haya jugado hace poco. Su ultima partida transcurrió hace más de una hora pero menos de cuatro.
 [X] Si no salen los LP, no se ve lo de las ultimas 12 horas y confunde.
 [X] La request a la API de riot para las partidas ahora contará con query parameters para el tiempo y el tipo de cola, así se ahorrarán llamadas a la API.

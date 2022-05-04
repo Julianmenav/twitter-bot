@@ -22,9 +22,10 @@ async function lolTweet(twitterName, acc) {
   const { tier, rank, leaguePoints, name} = tierData
   
   //Epoch timestamp in seconds
-  const timestampLimit = Math.floor((new Date().getTime() - HOURS * 3600000) / 1000 )
+  const rightNowMS = new Date().getTime()
+  const timestampLimit = Math.floor((rightNowMS - HOURS * 3600000) / 1000 )
   const matchData = await getMatchHistoryByPuuid(summonerPuuid, timestampLimit)
-  
+
   const totalGames = matchData.length
   const wins = matchData.filter(el => el.win).length
   const loses = totalGames - wins
@@ -41,19 +42,26 @@ async function lolTweet(twitterName, acc) {
     const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
     //return await tweet(noGamesText).catch(e => console.error(e))
   } 
-  //3. SI HAY SUFICIENTES PARTIDAS SE SIGUE CON EL PROGRAMA
+  //3. EN ESTE CASO SOLO SE SEGUIRÁ CON EL PROGRAMA SI LA ÚLTIMA PARTIDA HA SIDO HACE POCO +40 min, - 4 horas
+  let lastGameTime = matchData[0].timestamp
+  //Guard clause. If the game is not between the time range, end the program.
+  if( !(lastGameTime < rightNowMS - 3600 * 40 && lastGameTime > rightNowMS - 3600000 * 4)){
+    return console.log("Las última partida no es del todo reciente.")
+  }
+
+
   console.log("Se encontraron partidas.")
   console.log("Buscando los lps...")
   const lpData = await lpScraper(name, totalGames)
-
+  
   const makeSense = tester(matchData, lpData.order) //true or false
   const lpText = `${lpData.lp > 0 ? "+" : ""}${lpData.lp} Lps 
   [${lpData.order}]`
   const text =
-    `
-${getSentence(totalGames, wins, twitterName)}
-
-Cuenta: ${name}
+  `
+  ${getSentence(totalGames, wins, twitterName)}
+  
+  Cuenta: ${name}
 En las últimas ${HOURS} horas:
 ${wins}W - ${loses}L
 ${ makeSense && !isNaN(lpData.lp) ? lpText : "" }
