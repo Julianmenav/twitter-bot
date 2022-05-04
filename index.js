@@ -61,7 +61,7 @@ async function lolTweet(twitterName, acc) {
   `
   ${getSentence(totalGames, wins, twitterName)}
   
-  Cuenta: ${name}
+Cuenta: ${name}
 En las últimas ${HOURS} horas:
 ${wins}W - ${loses}L
 ${ makeSense && !isNaN(lpData.lp) ? lpText : "" }
