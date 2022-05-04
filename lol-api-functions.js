@@ -9,9 +9,12 @@ const getMatchHistoryByPuuid = async (puuid, timestamp) => {
     .catch(e => {
       console.error(e.response.data)
     })
-  result = []
+
+  //SI NO HAY SUFICIENTES PARTIDAS GUARD CLAUSE:  
+  if(matchHistoryResponse.data.length < 3) return []
   
   //Sólo este bucle me permite esperar los datos sin saltar al siguiente ciclo.  
+  result = []
   for (const element of matchHistoryResponse.data) {
     let gameResponse = await axios
       .get(`${process.env.LOL_REGION}/lol/match/v5/matches/${element}`,
