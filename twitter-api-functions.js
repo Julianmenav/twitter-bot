@@ -22,6 +22,29 @@ const tweet = async (msg, inReplyToId ) => {
   console.log("Tweeted!")
 }
 
+const borraTweets = async () => {
+  let twitterClient = newClient();
+  const dataf = await twitterClient.tweets.statusesUserTimeline({
+    screen_name: process.env.BOT_SCREEN_NAME,
+    count: 300
+  }).then(data => data.map(el => el.id_str))
+
+  for (const id of dataf){
+    console.log(id)
+    try {
+      await twitterClient.tweets.statusesDestroyById({
+        id: id
+      })
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  console.log("borrado")
+}
+
 module.exports = {
   tweet
 }
+
+
