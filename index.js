@@ -21,8 +21,8 @@ async function lolTweet(twitterName, acc) {
   const tierData = await getSummonerInfoByPuuid(summonerPuuid)
   const { tier, rank, leaguePoints, name} = tierData
   
-  
-  const timestampLimit = Math.floor(new Date().getTime()) - HOURS * 3600000
+  //Epoch timestamp in seconds
+  const timestampLimit = Math.floor((new Date().getTime() - HOURS * 3600000) / 1000 )
   const matchData = await getMatchHistoryByPuuid(summonerPuuid, timestampLimit)
   
   const totalGames = matchData.length

@@ -4,13 +4,13 @@ const axios = require('axios')
 //Funcion que devuelva las ultimas partidas jugadas, victorias, y el tiempo en unix
 const getMatchHistoryByPuuid = async (puuid, timestamp) => {
   const matchHistoryResponse = await axios
-    .get(`${process.env.LOL_REGION}/lol/match/v5/matches/by-puuid/${puuid}/ids`,
+    .get(`${process.env.LOL_REGION}/lol/match/v5/matches/by-puuid/${puuid}/ids?type=ranked&startTime=${timestamp}`,
       { headers: { "X-Riot-Token": process.env.LOL_KEY } })
     .catch(e => {
       console.error(e.response.data)
     })
   result = []
-
+  
   //Sólo este bucle me permite esperar los datos sin saltar al siguiente ciclo.  
   for (const element of matchHistoryResponse.data) {
     let gameResponse = await axios
@@ -21,8 +21,8 @@ const getMatchHistoryByPuuid = async (puuid, timestamp) => {
       })
     gameData = gameResponse.data.info
 
-    //TIME LIMIT
-    if (gameData.gameEndTimestamp < timestamp) { break; }
+    //TIME LIMIT (Epoch time in milliseconds)
+    //if (gameData.gameEndTimestamp < timestamp * 1000) { break; }
 
     //ONLY RANKED GAMES
     if (gameData.gameType === "MATCHED_GAME" && gameData.gameMode === "CLASSIC") {
