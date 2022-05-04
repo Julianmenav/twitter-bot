@@ -14,7 +14,7 @@ const lpScraper = async (summonerNameEncoded, nOfGames) => {
     return Array.from(document.querySelectorAll("div.m-15s0h17, div.m-122nwo5, div.m-laq7sq, div.m-2x65k2, div.m-1swtjkm > div > a > div"))  
       .map(el => ({"innerText" : el.innerText, "className": el.className}))
   })
-  console.log(lastGames)
+
   const lpDifference = lastGames.slice(0, nOfGames).reduce((agg, el, i) => {
     let text = el.innerText
     let selector = el.className  
