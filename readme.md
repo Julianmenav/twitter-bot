@@ -36,7 +36,6 @@ Ahora mismo:
 [X] Funciona perfecto el tweet manual, sea cual sea el @.
 [] Detector de menciones y respuesta.
 [X] Controlar todas las exceptions.
-[] Para evitar llamadas innecesarias a la api. Habría alguna forma de comprobar que ha jugado partidas suficientes con una sola llamada?
 [X] Crear frases según el winrate y numero de partidas. 
 [] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜.
 [X] En accounts, todos los nombres deberían estar escritos en minuscula. Cuando se busque se hará en minuscula y se twiteara asi tambien.

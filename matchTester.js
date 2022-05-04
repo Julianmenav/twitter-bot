@@ -3,10 +3,9 @@
 
 const tester = (matchData, lpData) => {
   return lpData.every((tag, i) => {
-    if (tag == "Promo") return true
-    if (tag.charAt(0) == "+" && matchData[i].win ) return true
-    if (tag.charAt(0) == "-" && !matchData[i].win) return true
-    return false
+    if (tag.charAt(0) == "+" && !matchData[i].win) return false
+    if (tag.charAt(0) == "-" && matchData[i].win) return false
+    return true
   })
 }
 

@@ -11,17 +11,22 @@ const lpScraper = async (summonerNameEncoded, nOfGames) => {
   
   
   const lastGames = await page.evaluate(() => {
-    return Array.from(document.querySelectorAll("div.m-15s0h17, div.m-122nwo5, div.m-laq7sq, div.m-2x65k2, div.m-1swtjkm > div > a > div"))
-      .map(el => el.innerText)
+    return Array.from(document.querySelectorAll("div.m-15s0h17, div.m-122nwo5, div.m-laq7sq, div.m-2x65k2, div.m-1swtjkm > div > a > div"))  
+      .map(el => ({"innerText" : el.innerText, "className": el.className}))
   })
-  
-  const lpDifference = lastGames.slice(0, nOfGames).reduce((agg, el) => {
-    agg.order.push(el)
-    if(el == "Promo"){
+  console.log(lastGames)
+  const lpDifference = lastGames.slice(0, nOfGames).reduce((agg, el, i) => {
+    let text = el.innerText
+    let selector = el.className  
+    if(text == "Promo"){
+      agg.order.push(
+        selector === 'm-laq7sq' ? "🟢" : "🔴"
+      )
       agg.promo += 1;
       return agg
     } else {
-      agg.lp += parseInt(el.slice(0, el.length - 2))
+      agg.order.push(text)
+      agg.lp += parseInt(text.slice(0, text.length - 2))
       return agg
     }
   },{"lp": 0, "promo": 0, "order": []})
