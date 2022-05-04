@@ -19,7 +19,7 @@ const getSentence = (totalGames, wins, twitterName) => {
         sentence = [`A @ ${twitterName} no le va mal!`, `@ ${twitterName} tiene manos`]
         break;
       default:
-        sentence = [`@ ${twitterName} SE LA ESTA SHACANDO`, `@ ${twitterName} MODO FAKER`]
+        sentence = [`@ ${twitterName} SE LA ESTA SHACANDO`, `@ ${twitterName} MODO FAKER`, `@ ${twitterName} va volando`]
         break;
     }
   } else {
