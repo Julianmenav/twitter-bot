@@ -13,7 +13,10 @@ const newClient = () => {
 }
 
 //Send tweet function.
-const tweet = async (msg, inReplyToId ) => {
+const tweet = async (msg, inReplyToScreenName, inReplyToId ) => {
+  if (inReplyToScreenName){
+    msg = '@' + inReplyToScreenName + msg
+  }
   let twitterClient = newClient();        
   const data = await twitterClient.tweets.statusesUpdate({
     status: msg,
