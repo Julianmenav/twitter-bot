@@ -34,7 +34,7 @@ Ahora mismo:
 [X] Conseguir la diferencia de LPs aunque sea con scraping.
 [X] Hacer la lista completa de participantes.
 [X] Funciona perfecto el tweet manual, sea cual sea el @.
-[] Detector de menciones y respuesta.
+[X] Detector de menciones y respuesta.
 [X] Controlar todas las exceptions.
 [X] Crear frases según el winrate y numero de partidas. 
 [X] Si está en 100 puntos añadir un esquema de la promo 🟥🟩🟩🟥⬜.
