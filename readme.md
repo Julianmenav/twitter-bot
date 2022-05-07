@@ -45,6 +45,8 @@ Ahora mismo:
 [X] La request a la API de riot para las partidas ahora contará con query parameters para el tiempo y el tipo de cola, así se ahorrarán llamadas a la API.
 [X] Se debe ver el número de partidas desde la primera llamada a la API (La que solo nos da códigos), ahí es cuando se debe parar el programa si hay menos de 3.
 [] En el bucle automático: Si un jugador no ha jugado suficiente que pase al siguiente.
+[] Cambiar el bucle que comprueba si hay menciones nuevas por un stream. 
+
 
 
 [] Pasar datos de acuentas a una base de datos en mongo y que se actualize de forma automática haciendo scrapping a páginas como por ejemplo lolpros
