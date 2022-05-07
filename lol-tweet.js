@@ -40,7 +40,7 @@ async function lolTweet(twitterName, acc, inReplyTo, inReplyToId) {
     }
     //2. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS SUFICIENTES:
     console.log("No se encontraron partidas.")
-    const noGamesText = ` @${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas...`
+    const noGamesText = `.@${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas...`
     return await tweet(noGamesText, inReplyTo, inReplyToId).catch(e => console.error(e))
   } 
   //3. EN ESTE CASO SOLO SE SEGUIRÁ CON EL PROGRAMA SI LA ÚLTIMA PARTIDA HA SIDO HACE POCO +40 min, - 4 horas
