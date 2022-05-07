@@ -25,6 +25,12 @@ const tweet = async (msg, inReplyToScreenName, inReplyToId ) => {
   console.log("Tweeted!")
 }
 
+const searchMentions = async (count) => {
+  let twitterClient = newClient();
+  const data = await twitterClient.tweets.statusesMentionsTimeline({count: count})
+  return data.map(tweet => ({"id": tweet.id_str, "author": tweet.user.screen_name, "msg": tweet.text, "inReplyTo": tweet.in_reply_to_screen_name}))
+}
+
 const borraTweets = async () => {
   let twitterClient = newClient();
   const dataf = await twitterClient.tweets.statusesUserTimeline({
@@ -46,8 +52,12 @@ const borraTweets = async () => {
   console.log("borrado")
 }
 
+
+
+
 module.exports = {
-  tweet
+  tweet,
+  searchMentions
 }
 
 

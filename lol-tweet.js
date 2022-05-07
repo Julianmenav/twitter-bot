@@ -16,7 +16,7 @@ async function lolTweet(twitterName, acc, inReplyTo, inReplyToId) {
   //Si el nombre no está en nuestra lista descartamos.
   if (!summoner){
     console.log("No está en la lista.")
-    return await tweet("No le sabe 😔", inReplyTo, inReplyToId).catch(e => console.error(e))
+    return await tweet(" No le sabe 😔", inReplyTo, inReplyToId).catch(e => console.error(e))
   }
   const summonerPuuid = summoner[acc].puuid
   const tierData = await getSummonerInfoByPuuid(summonerPuuid)
@@ -39,9 +39,9 @@ async function lolTweet(twitterName, acc, inReplyTo, inReplyToId) {
       return lolTweet(OBJETIVE, acc + 1)
     }
     //2. UNA VEZ SE HAN MIRADO TODAS Y NO HAY PARTIDAS SUFICIENTES:
-    return console.log("No se encontraron partidas.")
-    const noGamesText = `@ ${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas bro...`
-    //return await tweet(noGamesText, inReplyTo, inReplyToId).catch(e => console.error(e))
+    console.log("No se encontraron partidas.")
+    const noGamesText = ` @${twitterName} no ha jugado lo suficiente en las últimas ${HOURS} horas...`
+    return await tweet(noGamesText, inReplyTo, inReplyToId).catch(e => console.error(e))
   } 
   //3. EN ESTE CASO SOLO SE SEGUIRÁ CON EL PROGRAMA SI LA ÚLTIMA PARTIDA HA SIDO HACE POCO +40 min, - 4 horas
   let lastGameTime = matchData[0].timestamp

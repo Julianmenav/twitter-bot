@@ -1,8 +1,9 @@
 require('dotenv').config()
 const {lolTweet} = require('./lol-tweet')
+const {watchAndReply} = require('./watchAndReply')
 const accounts = require('./accountsList')
 const OBJETIVE = "FTREFORMED"
-
+const LOOP_TIME = 10000
 
 
 const bucle = async (loopTime) => {
@@ -17,5 +18,5 @@ const bucle = async (loopTime) => {
   }
 }
 
-bucle(5000)
-//lolTweet(OBJETIVE, 0)
+//bucle(5000)
+watchAndReply(LOOP_TIME)
