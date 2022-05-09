@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { searchMentions } = require('./twitter-api-functions')
 const { lolTweet } = require('./lol-tweet')
 
@@ -17,9 +18,10 @@ const watchAndReply = async (loopTime) => {
       if (newTweets.length > 0) {
         for (const tweet of newTweets) {
           const objetive = tweet.msg.match(/(?<=\@)(.*?)(?=\s)/g)[0]
+          console.log(objetive, tweet)
           const inReplyTo = tweet.author
           const inReplyToId = tweet.id
-          if (objetive === tweet.inReplyTo && objetive !== "lolStatsES"){
+          if (objetive === tweet.inReplyTo && objetive !== process.env.BOT_SCREEN_NAME){
             await lolTweet(objetive, 0, inReplyTo, inReplyToId)
           }
         }
