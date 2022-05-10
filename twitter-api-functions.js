@@ -13,11 +13,11 @@ const newClient = () => {
 }
 
 //Send tweet function.
-const tweet = async (msg, inReplyToScreenName, inReplyToId ) => {
-  if (inReplyToScreenName){
+const tweet = async (msg, inReplyToScreenName, inReplyToId) => {
+  if (inReplyToScreenName) {
     msg = '@' + inReplyToScreenName + msg
   }
-  let twitterClient = newClient();        
+  let twitterClient = newClient();
   const data = await twitterClient.tweets.statusesUpdate({
     status: msg,
     in_reply_to_status_id: inReplyToId
@@ -27,33 +27,9 @@ const tweet = async (msg, inReplyToScreenName, inReplyToId ) => {
 
 const searchMentions = async (count) => {
   let twitterClient = newClient();
-  const data = await twitterClient.tweets.statusesMentionsTimeline({count: count})
-  return data.map(tweet => ({"id": tweet.id_str, "author": tweet.user.screen_name, "msg": tweet.text, "inReplyTo": tweet.in_reply_to_screen_name}))
+  const data = await twitterClient.tweets.statusesMentionsTimeline({ count: count })
+  return data.map(tweet => ({ "id": tweet.id_str, "author": tweet.user.screen_name, "msg": tweet.text, "inReplyTo": tweet.in_reply_to_screen_name }))
 }
-
-const borraTweets = async () => {
-  let twitterClient = newClient();
-  const dataf = await twitterClient.tweets.statusesUserTimeline({
-    screen_name: process.env.BOT_SCREEN_NAME,
-    count: 300
-  }).then(data => data.map(el => el.id_str))
-
-  for (const id of dataf){
-    console.log(id)
-    try {
-      await twitterClient.tweets.statusesDestroyById({
-        id: id
-      })
-      
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  console.log("borrado")
-}
-
-
-
 
 module.exports = {
   tweet,

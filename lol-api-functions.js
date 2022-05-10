@@ -11,8 +11,8 @@ const getMatchHistoryByPuuid = async (puuid, timestamp) => {
     })
 
   //SI NO HAY SUFICIENTES PARTIDAS GUARD CLAUSE:  
-  if(matchHistoryResponse.data.length < 3) return []
-  
+  if (matchHistoryResponse.data.length < 3) return []
+
   //Sólo este bucle me permite esperar los datos sin saltar al siguiente ciclo.  
   result = []
   for (const element of matchHistoryResponse.data) {

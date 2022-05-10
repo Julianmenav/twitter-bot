@@ -1,4 +1,3 @@
-
 const getSentence = (totalGames, wins, twitterName) => {
   const winRatio = wins / totalGames
   let mention = `@${twitterName}`
@@ -42,8 +41,6 @@ const getSentence = (totalGames, wins, twitterName) => {
         break;
     }
   }
-
-
   return sentence[Math.floor(Math.random() * sentence.length)]
 }
 

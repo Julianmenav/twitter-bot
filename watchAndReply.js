@@ -8,7 +8,7 @@ const getNewTweet = (arr1, arr2) => {
 
 const watchAndReply = async (loopTime) => {
   const oldMentions = await searchMentions(20);
-  
+
   const watchLoop = async (loopTime, mentions) => {
     while (true) {
       console.log("bucle mirando...")
@@ -21,7 +21,7 @@ const watchAndReply = async (loopTime) => {
           console.log(objetive, tweet)
           const inReplyTo = tweet.author
           const inReplyToId = tweet.id
-          if (objetive === tweet.inReplyTo && objetive !== process.env.BOT_SCREEN_NAME){
+          if (objetive === tweet.inReplyTo && objetive !== process.env.BOT_SCREEN_NAME) {
             await lolTweet(objetive, 0, inReplyTo, inReplyToId)
           }
         }
