@@ -1,9 +1,9 @@
 require('dotenv').config()
-const { tweet } = require('./twitter-api-functions')
-const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./lol-api-functions')
+const { tweet } = require('./api/twitter-api-functions')
+const { getMatchHistoryByPuuid, getSummonerInfoByPuuid } = require('./api/lol-api-functions')
 const { lpScraper } = require('./leagueScraper')
-const { tester } = require('./matchTester')
-const { getParameterCaseInsensitive } = require('./caseInsensitiveFinder')
+const { tester } = require('./utils/matchTester')
+const { getParameterCaseInsensitive } = require('./utils/caseInsensitiveFinder')
 const { getSentence } = require('./sentences')
 const accounts = require('./accountsList')
 const HOURS = 12

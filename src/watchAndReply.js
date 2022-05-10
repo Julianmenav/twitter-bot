@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { searchMentions } = require('./twitter-api-functions')
+const { searchMentions } = require('./api/twitter-api-functions')
 const { lolTweet } = require('./lol-tweet')
 
 const getNewTweet = (arr1, arr2) => {
