@@ -11,14 +11,14 @@ const watchAndReply = async (loopTime) => {
 
   const watchLoop = async (loopTime, mentions) => {
     while (true) {
-      console.log("bucle mirando...")
+      console.log("Searching for mentions...")
       const newMentions = await searchMentions(20);
       const newTweets = getNewTweet(mentions, newMentions)
       //Si hay nuevas menciones, tweetea en orden sobre ellas.
       if (newTweets.length > 0) {
         for (const tweet of newTweets) {
           const objetive = tweet.msg.match(/(?<=\@)(.*?)(?=\s)/g)[0]
-          console.log(objetive, tweet)
+          console.log(`New mention from ${objetive}! \n`, tweet)
           const inReplyTo = tweet.author
           const inReplyToId = tweet.id
           if (objetive.toUpperCase() === tweet.inReplyTo.toUpperCase() && objetive !== process.env.BOT_SCREEN_NAME) {
