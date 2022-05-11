@@ -21,7 +21,7 @@ const watchAndReply = async (loopTime) => {
           console.log(objetive, tweet)
           const inReplyTo = tweet.author
           const inReplyToId = tweet.id
-          if (objetive === tweet.inReplyTo && objetive !== process.env.BOT_SCREEN_NAME) {
+          if (objetive.toUpperCase() === tweet.inReplyTo.toUpperCase() && objetive !== process.env.BOT_SCREEN_NAME) {
             await lolTweet(objetive, 0, inReplyTo, inReplyToId)
           }
         }
