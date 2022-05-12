@@ -31,5 +31,5 @@ This bot was created to interact with people on the platform, during an eSports 
 - [] Docker
 - [] Deploy
 - [] Cambiar el bucle que comprueba si hay menciones nuevas por un stream. 
-- [] Usar since_id y max_id en la request de menciones.
+- [X] Usar since_id y max_id en la request de menciones.
 - [] Pasar datos de acuentas a una base de datos en mongo y que se actualize de forma automática haciendo scrapping a páginas como por ejemplo lolpros
