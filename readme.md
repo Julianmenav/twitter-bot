@@ -29,7 +29,8 @@ This bot was created to interact with people on the platform, during an eSports 
 - [X] La request a la API de riot para las partidas ahora contará con query parameters para el tiempo y el tipo de cola, así se ahorrarán llamadas a la API.
 - [X] Se debe ver el número de partidas desde la primera llamada a la API (La que solo nos da códigos), ahí es cuando se debe parar el programa si hay menos de 3.
 - [] Docker
-- [] Deploy
-- [] Cambiar el bucle que comprueba si hay menciones nuevas por un stream. 
+- [X] Deploy
+- [X] Cambiar el bucle que comprueba si hay menciones nuevas por un stream. 
 - [X] Usar since_id y max_id en la request de menciones.
 - [] Pasar datos de acuentas a una base de datos en mongo y que se actualize de forma automática haciendo scrapping a páginas como por ejemplo lolpros
+  
