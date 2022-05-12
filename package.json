@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "random": "node ./src/randomTweet.js"
   },
-  "author": "",
+  "author": "Julian Mena",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.26.1",
