@@ -1,6 +1,6 @@
 const getSentence = (totalGames, wins, twitterName) => {
   const winRatio = wins / totalGames
-  let mention = `@${twitterName}`
+  let mention = `@ ${twitterName}`
   let sentence = "";
   //Based on Win ratio: 5 GRADOS: 0-0.25; 0.25-0.45; 0.45-0.55; 0.55-0.75, 0.75-1
   //Based on totalGames:   >6

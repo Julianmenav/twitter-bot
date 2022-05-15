@@ -5,12 +5,11 @@ const { lpScraper } = require('./leagueScraper')
 const { tester } = require('./utils/matchTester')
 const { getParameterCaseInsensitive } = require('./utils/caseInsensitiveFinder')
 const { getSentence } = require('./sentences')
-const accounts = require('./accountsList')
 const HOURS = 12
 
 
 
-async function lolTweet(twitterName, acc, inReplyTo, inReplyToId) {
+async function lolTweet(accounts, twitterName, acc, inReplyTo, inReplyToId) {
   console.log(`Buscando partidas para ${twitterName}...`)
   const summoner = getParameterCaseInsensitive(accounts, twitterName)
   //Si el nombre no está en nuestra lista descartamos.
@@ -74,7 +73,7 @@ ${tier} ${rank}  ${leaguePoints}LPs
 }
 
 
-async function lolTweetX(twitterName, acc, inReplyTo, inReplyToId) {
+async function lolTweetX(accounts, twitterName, acc, inReplyTo, inReplyToId) {
   console.log(`Buscando partidas para ${twitterName}...`)
   const summoner = getParameterCaseInsensitive(accounts, twitterName)
   //Si el nombre no está en nuestra lista descartamos.
@@ -98,7 +97,7 @@ async function lolTweetX(twitterName, acc, inReplyTo, inReplyToId) {
   //SI NO HAY SUFICIENTES PARTIDAS:
   if (totalGames < 3) {
     //1. PASA A MIRAR LA SIGUIENTE CUENTA DEL JUGADOR (SI EXISTE)
-    if (acc < accounts[twitterName].length - 1) {
+    if (acc < summoner.length - 1) {
       console.log(`Buscando en la siguiente cuenta de ${OBJETIVE}...`)
       return lolTweet(OBJETIVE, acc + 1)
     }

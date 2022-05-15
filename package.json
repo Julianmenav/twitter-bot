@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
+    "mongoose": "^6.3.3",
     "puppeteer": "^13.7.0",
     "twitter-api-client": "^1.5.2"
   }
