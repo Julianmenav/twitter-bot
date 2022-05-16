@@ -5,13 +5,42 @@ This bot was created to interact with people on the platform, during an eSports 
 * Reply people when mentioned.
 * Uses Riot API to extract data from the players of the tournament to reply those mentions.
 * Scrap some pages for extra data.
+* Makes requests to a Mongo database in wich the players and their account identifiers are stored.
 
 ## Dependencies
 * [Puppeteer](https://github.com/puppeteer/puppeteer): Version ^13.7.0 
 * [Axios](https://github.com/axios/axios) Version ^0.26.1
+* [Mongoose](https://mongoosejs.com/): Version ^6.3.3
 * [twitter-api-client](https://www.npmjs.com/package/twitter-api-client): Version ^1.5.2
+* [dotenv](https://www.npmjs.com/package/dotenv): Version ^16.0.0
 
-### ToDo
+## Enviroment Variables
+In order for this app to work, it is necessary to provide some environment variables vía dotenv library.
+It is necessary to provide a Mongo URI that points to our database, as well as the URL pointing to the Riot Server on which we want to make the application.
+
+#### Riot Api
+To make requests to Riot Api is needed an account with which will be provided with a Developer Key. This key expires every 24h, so in order to have a durable key, is needed to present a detailed description of our project and wait for the concession. This project has his own Product Key.
+
+#### Twitter Api
+Also, to make request to Twitter Api we must create a developer account and ask for keys. Those keys are ConsumerKey, ConsumerSecret, AccessToken and AccessTokenSecret.
+
+## Run
+Create .env file with all Enviroment Variables.
+
+Install dependencies:
+```
+npm i
+```
+
+Run locally:
+```
+npm start
+```
+## Deployment
+
+This app has been hosted in [Railway](https://railway.app/)
+
+## ToDo
 - [X] La función para sacar información del jugador debe usar puuid en lugar del nombre de invocador. Este último nunca debe usarse para buscar en la api ya que puede cambiar.
 - [X] Añadir un número de horas en las que buscar (Pasar eso a unix: unix hoy - unix numero horas.)
 - [X] Tweet para cuando falla el nombre.
